@@ -33,8 +33,13 @@ class GitPivotalTrackerIntegration::Command::Start < GitPivotalTrackerIntegratio
   #   * a story type (feature, bug, chore)
   #   * +nil+
   # @return [void]
-  def run(filter)
-    story = GitPivotalTrackerIntegration::Util::Story.select_story @project, filter
+  def run(filter, filter_value = nil)
+    full_filter = filter
+    unless filter_value.nil?
+      full_filter = { key: filter, value: filter_value }
+    end
+
+    story = GitPivotalTrackerIntegration::Util::Story.select_story @project, full_filter
 
     GitPivotalTrackerIntegration::Util::Story.pretty_print story
 

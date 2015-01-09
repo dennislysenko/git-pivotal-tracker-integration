@@ -93,13 +93,26 @@ class GitPivotalTrackerIntegration::Util::Story
     end
   end
 
-  def self.find_story(project, type, limit)
+  @@allowed_keys = %w{label}
+  def self.find_story(project, filter, limit)
+    type, key, value = nil
+    if filter.is_a? Hash
+      if @@allowed_keys.include? filter[:key]
+        key = filter[:key]
+        value = filter[:value]
+      end
+    else
+      type = filter
+    end
+
     criteria = {
       :current_state => CANDIDATE_STATES,
       :limit => limit
     }
     if type
       criteria[:story_type] = type
+    elsif key && value
+      criteria[key.to_sym] = value
     end
 
     candidates = project.stories.all criteria
