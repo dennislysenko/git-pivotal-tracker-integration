@@ -71,6 +71,17 @@ $ git start feature
 Choose story to start:
 ```
 
+The third way to run the command is by specifying a label under which you would like to start a story.  It will offer the first five stories (based on the backlog's order) containing that label--potentially among others--to choose from.
+```plain
+$ git start label server
+1. Nam vitae condimentum odio
+2. Nam vitae mauris cursus, pulvinar odio vitae, sagittis metus
+3. In commodo sit amet magna eleifend blandit
+4. Duis at sodales erat
+5. Ut dapibus risus malesuada quam tempus
+Choose story to start:
+```
+
 Finally the command can be run without specifying anything.  In this case, it will then offer the first five stories (based on the backlog's order) of any type to choose from.
 
 ```plain
